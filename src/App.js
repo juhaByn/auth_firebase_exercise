@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {useState} from 'react';
+// import { getAuth} from 'firebase/auth';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Home from './home/Home';
+import Login from './authentification/Login';
+import SignUp from './authentification/SignUp';
 function App() {
+  // const auth = getAuth();
+  const [loggedIn, setLogin] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <div className='max-w-md mx-auto px-2'>
+        <Routes>
+              <Route path='auth_page/' element={<Home loggedIn={loggedIn}/>}/>
+              <Route path='auth_page/home' element={<Home loggedIn={loggedIn} setLogin={setLogin}/>}/>
+              <Route path='auth_page/login' element={<Login loggedIn={loggedIn} setLogin={setLogin}/>}/>
+              <Route path='auth_page/signup' element={<SignUp/>}/>
+        </Routes>
+       </div>
+    </Router>
   );
 }
 
